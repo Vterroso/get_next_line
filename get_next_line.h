@@ -6,7 +6,7 @@
 /*   By: vterroso <vterroso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:16:02 by vterroso          #+#    #+#             */
-/*   Updated: 2023/04/11 15:27:58 by vterroso         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:33:50 by vterroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # define BUFFER_SIZE 42
 #endif
 
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdio.h>
+char    *get_next_line(int fd);
 
 
 #endif
