@@ -12,18 +12,41 @@
 
 #include "get_next_line.h"
 
-
-char *get_next_line(int fd)
+char    *get_next_line(int fd)
 {
-    char        *buf;
-    const char  *line;
+    static char *buf;
+    /*char        *line;*/
+    char        *aux;
+    int         readbytes;
 
-    if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0) < 0)
+    readbytes = 1;
+    aux = malloc((BUFFER_SIZE + 1) * sizeof(char));
+    if (!aux)
         return (NULL);
-    buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
-    if (!buf)
+    if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
-    
-    read(fd, buf, BUFFER_SIZE);
-    return (line);
+    while ((ft_strchr(buf, '\n') == NULL) && (readbytes != 0))
+    {
+        readbytes = read(fd, aux, BUFFER_SIZE);
+        buf[readbytes] = '\0';
+        buf = ft_strjoin(buf, aux);
+        
+    }
+    return (ft_strdup(buf));
+    }
+
+int main(void)
+{
+    int fd;
+    char *line;
+
+    fd = open("/Users/vterroso/Desktop/prueba.txt", O_RDONLY);
+    line = get_next_line(fd);
+    printf("1%s\n", line);
+    line = get_next_line(fd);
+    printf("2%s\n", line);
+    line = get_next_line(fd);
+    printf("3%s*\n", line);
+    close(fd);
+    return (0);
 }

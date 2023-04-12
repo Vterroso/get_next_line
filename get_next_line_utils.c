@@ -12,6 +12,16 @@
 
 #include "get_next_line.h"
 
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+    i = 0;
+    while (s[i])
+        i++;
+	return (i);
+}
+
 char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
@@ -43,6 +53,32 @@ char	*ft_strdup(const char *src)
 	return (dest);
 }
 
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t		i;
+	char		*d;
+	const char	*s;
+
+	i = 0;
+	d = dst;
+	s = src;
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	if (dst <= src)
+	{
+		while (i < len)
+		{
+			d[i] = s[i];
+			i++;
+		}
+	}
+	else
+	{
+		while (len-- > 0)
+			d[len] = s [len];
+	}
+	return (dst);
+}
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
@@ -51,63 +87,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	j = 0;
 	i = 0;
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (0);
 	str = (char *) malloc(((ft_strlen(s1) + ft_strlen(s2)) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	while (s1[i] != '\0')
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[j] != '\0')
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
-	}
+	ft_memmove(str, s1, ft_strlen(s1));
+	ft_memmove(str[ft_strlen(s1)], s2, ft_strlen(s2));
 	str[i] = '\0';
 	return (str);
 }
 
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*str;
-	size_t	i;
-	size_t	j;
-
-	i = start;
-	j = 0;
-	if (!s)
-		return (0);
-	if (ft_strlen(s) <= start)
-		return (ft_strdup(""));
-	if (ft_strlen(s + start) < len)
-		len = ft_strlen(s + start);
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	while (i < start)
-		i++;
-	while (j < len && s[i] != '\0')
-	{
-		str[j] = s[i];
-		i++;
-		j++;
-	}
-	str[j] = '\0';
-	return (str);
-}
-
-size_t	ft_strlen(const char *s)
-{
-    size_t	i;
-
-    i = 0;
-    while (s[i])
-        i++;
-    return (i);
-}
 
