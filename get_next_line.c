@@ -43,6 +43,8 @@ static char    *ft_rest(char *buf)
     while (buf[i] && buf[i] != '\n')
         i++;
     str = malloc((ft_strlen(buf) - i + 1) * sizeof(char));
+    if (!str)
+        return (NULL);
     while (buf[i])
     {
         str[i] = buf[i];
