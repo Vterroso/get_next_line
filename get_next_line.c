@@ -12,28 +12,81 @@
 
 #include "get_next_line.h"
 
-char    *get_next_line(int fd)
+static char    *ft_line(char *buf)
 {
-    static char *buf;
-    /*char        *line;*/
-    char        *aux;
-    int         readbytes;
+    int     i;
+    char    *str;
 
-    readbytes = 1;
+    i = 0;
+    while (buf[i] && buf[i] != '\n')
+        i++;
+    str = malloc((i + 2) * sizeof(char));
+    if (!str)
+        return (NULL);
+    i = 0;
+    while (buf[i] && buf[i] != '\n')
+    {
+        str[i] = buf[i];
+        i++;
+    }
+    str[i] = '\0';
+    return(str);
+}
+
+
+static char    *ft_rest(char *buf)
+{
+    int     i;
+    char    *str;
+
+    i = 0;
+    while (buf[i] && buf[i] != '\n')
+        i++;
+    str = malloc((ft_strlen(buf) - i + 1) * sizeof(char));
+    while (buf[i])
+    {
+        str[i] = buf[i];
+        i++;
+    }
+    str[i] = '\0';
+    return(str);
+}
+
+static char    *ft_read(int fd, char *buf)
+{
+    char    *aux;
+    int     read_bytes;
+
+    read_bytes = 1;
     aux = malloc((BUFFER_SIZE + 1) * sizeof(char));
     if (!aux)
         return (NULL);
+    while (!ft_strchr(buf, '\n') && (read_bytes != 0))
+    {
+        read_bytes = read(fd, aux, BUFFER_SIZE);
+        aux[read_bytes] = '\0';
+        buf = ft_strjoin(buf, aux);  
+    }
+    free(aux);
+    return (buf);
+    }
+    
+
+char    *get_next_line(int fd)
+{
+    static char *buf;
+    char        *line;
+
+
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
-    while ((ft_strchr(buf, '\n') == NULL) && (readbytes != 0))
-    {
-        readbytes = read(fd, aux, BUFFER_SIZE);
-        buf[readbytes] = '\0';
-        buf = ft_strjoin(buf, aux);
-        
-    }
-    return (ft_strdup(buf));
-    }
+    buf = ft_read(fd, buf);
+    if (!buf)
+        return (NULL);
+    line = ft_line(buf);
+    buf = ft_rest(buf);
+    return (line);
+}
 
 int main(void)
 {
@@ -42,11 +95,6 @@ int main(void)
 
     fd = open("/Users/vterroso/Desktop/prueba.txt", O_RDONLY);
     line = get_next_line(fd);
-    printf("1%s\n", line);
-    line = get_next_line(fd);
-    printf("2%s\n", line);
-    line = get_next_line(fd);
-    printf("3%s*\n", line);
-    close(fd);
+    printf("%s\n", line);
     return (0);
 }

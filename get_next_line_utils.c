@@ -53,32 +53,6 @@ char	*ft_strdup(const char *src)
 	return (dest);
 }
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	size_t		i;
-	char		*d;
-	const char	*s;
-
-	i = 0;
-	d = dst;
-	s = src;
-	if (dst == NULL && src == NULL)
-		return (NULL);
-	if (dst <= src)
-	{
-		while (i < len)
-		{
-			d[i] = s[i];
-			i++;
-		}
-	}
-	else
-	{
-		while (len-- > 0)
-			d[len] = s [len];
-	}
-	return (dst);
-}
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
@@ -87,16 +61,26 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	j = 0;
 	i = 0;
-	if (!s1 && !s2)
+	if (!s1 || !s2)
 		return (0);
 	str = (char *) malloc(((ft_strlen(s1) + ft_strlen(s2)) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	ft_memmove(str, s1, ft_strlen(s1));
-	ft_memmove(str[ft_strlen(s1)], s2, ft_strlen(s2));
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
 	str[i] = '\0';
 	return (str);
 }
+
 
 
 
