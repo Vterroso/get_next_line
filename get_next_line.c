@@ -29,7 +29,7 @@ char    *ft_line(char *buf)
         str[i] = buf[i];
         i++;
     }
-    if (buf[i] == '\n' || buf[i] == '\0')
+    if (buf[i] == '\n')
     {
         str[i] = buf [i];
         i++;
@@ -138,6 +138,6 @@ int main()
     printf("%s", line);
     free(line);
     close(fd);
-    //system("leaks -q a.out");
+    system("leaks -q a.out");
     return (0);
 }
