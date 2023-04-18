@@ -63,6 +63,7 @@ char    *ft_read(int fd, char *buf)
         if (read_bytes == -1)
         {
             free(buf);
+            free(aux);
             return (NULL);
         }
         aux[read_bytes] = '\0';
@@ -72,14 +73,13 @@ char    *ft_read(int fd, char *buf)
     return (buf);
     }
     
-
 char    *get_next_line(int fd)
 {
     static char *buf;
     char        *line;
 
 
-    if (fd < 0 || BUFFER_SIZE <= 0 || )
+    if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
         return (NULL);
     buf = ft_read(fd, buf);
     if (!buf) 
@@ -94,7 +94,7 @@ int main()
     char    *line;
     int     fd;
 
-    fd = open("prueba.txt", O_RDONLY);
+    fd = open("pruebaa.txt", O_RDONLY);
     if (fd == -1)
     {
         close(fd);
