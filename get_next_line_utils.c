@@ -79,7 +79,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = malloc(sizeof(char) * 1);
 		s1[0] = '\0';
 	}
-	if (!s1 && !s2)
+	if (!s1 || !s2)
 		return (0);
 	str = (char *) malloc(((ft_strlen(s1) + ft_strlen(s2)) + 1) * sizeof(char));
 	if (!str)

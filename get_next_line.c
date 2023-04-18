@@ -36,7 +36,7 @@ char    *ft_rest(char *buf)
     i = 0;
     while (buf[i] && buf[i] != '\n')
         i++;
-    if (!buf || buf[i] == '\0')
+    if (!buf)
     {
         free(buf);
         return (NULL);
@@ -79,23 +79,16 @@ char    *get_next_line(int fd)
     char        *line;
 
 
-    if (fd < 0 || BUFFER_SIZE <= 0)
+    if (fd < 0 || BUFFER_SIZE <= 0 || )
         return (NULL);
     buf = ft_read(fd, buf);
     if (!buf) 
         return (NULL);
     line = ft_line(buf);
-    /*if (!line)
-    {
-        free (buf);
-        return (NULL);
-    } */
     buf = ft_rest(buf);
-    if (!buf)
-        return (NULL);
     return (line);
 }
-
+/*
 int main()
 {
     char    *line;
@@ -124,4 +117,4 @@ int main()
     close(fd);
     system("leaks -q a.out");
     return (0);
-}
+}*/
