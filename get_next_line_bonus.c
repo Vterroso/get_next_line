@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vterroso <vterroso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 12:14:30 by vterroso          #+#    #+#             */
-/*   Updated: 2023/04/18 18:14:01 by vterroso         ###   ########.fr       */
+/*   Created: 2023/04/18 16:22:37 by vterroso          #+#    #+#             */
+/*   Updated: 2023/04/18 16:56:07 by vterroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,16 @@ char	*ft_read(int fd, char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*buf;
+	static char	*buf[OPEN_MAX];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);
-	buf = ft_read(fd, buf);
-	if (!buf)
+	buf[fd] = ft_read(fd, buf[fd]);
+	if (!buf[fd])
 		return (NULL);
-	line = ft_line(buf);
-	buf = ft_rest(buf);
+	line = ft_line(buf[fd]);
+	buf[fd] = ft_rest(buf[fd]);
 	return (line);
 }
 /*
@@ -93,7 +93,6 @@ int	main(void)
     int     fd;
 
     fd = open("pruebaa.txt", O_RDONLY);
-	//fd = 0;
     if (fd == -1)
     {
         close(fd);
