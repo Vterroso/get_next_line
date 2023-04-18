@@ -30,6 +30,7 @@ char    *ft_line(char *buf);
 char    *get_next_line(int fd);
 char    *ft_rest(char *buf);
 char    *ft_read(int fd, char *buf);
+char	*ft_substr(char *s, unsigned int start, size_t len);
 
 
 #endif 

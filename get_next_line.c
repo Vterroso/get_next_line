@@ -18,32 +18,20 @@ char    *ft_line(char *buf)
     char    *str;
 
     i = 0;
+    if (!buf)
+        return (NULL);
     while (buf[i] && buf[i] != '\n')
         i++;
-    str = malloc((i + 1) * sizeof(char));
-    if (!str)
-        return (NULL);
-    i = 0;
-    while (buf[i] && buf[i] != '\n' )
-    {
-        str[i] = buf[i];
-        i++;
-    }
-    if (buf[i] == '\n')
-    {
-        str[i] = buf [i];
-        i++;
-    }
-    str[i] = '\0';
+    str = ft_substr(buf, 0, i + 1);
     return(str);
 }
 
 
 char    *ft_rest(char *buf)
 {
-    int     i;
-    int     j;
-    char    *str;
+    int       i;
+    size_t      len;
+    char        *str;
 
     i = 0;
     while (buf[i] && buf[i] != '\n')
@@ -53,15 +41,10 @@ char    *ft_rest(char *buf)
         free(buf);
         return (NULL);
     }
-    str = malloc((ft_strlen(buf) - i + 1) * sizeof(char));
-    if (!str)
-        return (NULL);
-    i++;
-    j = 0;
-    while (buf[i])
-        str[j++] = buf[i++];
-    str[j] = '\0';
-    free(buf);
+    len = ft_strlen(buf);
+    len = len - i;
+    str = ft_substr(buf, (i + 1), len);
+    free (buf);
     return (str);
 }
 
@@ -102,7 +85,7 @@ char    *get_next_line(int fd)
     if (!buf) 
         return (NULL);
     line = ft_line(buf);
-/*     if (!line)
+    /*if (!line)
     {
         free (buf);
         return (NULL);
@@ -117,6 +100,7 @@ int main()
 {
     char    *line;
     int     fd;
+
     fd = open("prueba.txt", O_RDONLY);
     if (fd == -1)
     {

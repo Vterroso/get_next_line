@@ -22,6 +22,35 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	i = start;
+	j = 0;
+	if (!s)
+		return (0);
+	if (ft_strlen(s) <= start)
+		return (NULL);
+	if (ft_strlen(s + start) < len)
+		len = ft_strlen(s + start);
+	str = (char *)malloc((len + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	while (i < start)
+		i++;
+	while (j < len && s[i] != '\0')
+	{
+		str[j] = s[i];
+		i++;
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
+}
+
 int	ft_strchr(const char *s, int c)
 {
 	if (!s)
