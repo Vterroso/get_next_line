@@ -6,7 +6,7 @@
 /*   By: vterroso <vterroso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:22:37 by vterroso          #+#    #+#             */
-/*   Updated: 2023/04/19 15:31:54 by vterroso         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:42:07 by vterroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,7 @@ int	main(void)
     fd1 = open("prueba.txt", O_RDONLY);
 	fd2 = open("prueba2.txt", O_RDONLY);
 	fd3 = open("prueba3.txt", O_RDONLY);
-    if (fd1 == -1)
-    {
-        close(fd1);
-        return (0);
-    }
+
     line1 = get_next_line(fd1);
 	line2 = get_next_line(fd2);
 	line3 = get_next_line(fd3);
