@@ -6,11 +6,11 @@
 /*   By: vterroso <vterroso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:22:37 by vterroso          #+#    #+#             */
-/*   Updated: 2023/04/18 16:56:07 by vterroso         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:31:54 by vterroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_line(char *buf)
 {
@@ -89,30 +89,53 @@ char	*get_next_line(int fd)
 /*
 int	main(void)
 {
-    char    *line;
-    int     fd;
+    char    *line1;
+	char    *line2;
+	char    *line3;
+	
+    int     fd1;
+	int		fd2;
+	int		fd3;
+	
 
-    fd = open("pruebaa.txt", O_RDONLY);
-    if (fd == -1)
+    fd1 = open("prueba.txt", O_RDONLY);
+	fd2 = open("prueba2.txt", O_RDONLY);
+	fd3 = open("prueba3.txt", O_RDONLY);
+    if (fd1 == -1)
     {
-        close(fd);
+        close(fd1);
         return (0);
     }
-    line = "";
-    while (line != NULL)
-    {
-        line = get_next_line(fd);
-        if (!line)
-        {
-            free (line);
-            break ;
-        }
-        printf("%s", line);
-        free(line);
-    }
-    printf("%s", line);
-    free(line);
-    close(fd);
+    line1 = get_next_line(fd1);
+	line2 = get_next_line(fd2);
+	line3 = get_next_line(fd3);
+    
+	printf("%s", line1);
+	printf("%s", line2);
+	printf("%s", line3);
+
+	line1 = get_next_line
+	line2 = get_next_line(fd2);
+	line3 = get_next_line(fd3);
+    
+	printf("%s", line1);
+	printf("%s", line2);
+	printf("%s", line3);
+
+	line1 = get_next_line(fd1);
+	line2 = get_next_line(fd2);
+	line3 = get_next_line(fd3);
+    
+	printf("%s", line1);
+	printf("%s", line2);
+	printf("%s", line3);
+	
+    free(line1);
+	free(line2);
+	free(line3);
+    close(fd1);
+	close(fd2);
+	close(fd3);
     system("leaks -q a.out");
     return (0);
 }*/

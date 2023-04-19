@@ -6,7 +6,7 @@
 /*   By: vterroso <vterroso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:22:09 by vterroso          #+#    #+#             */
-/*   Updated: 2023/04/18 16:50:24 by vterroso         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:33:43 by vterroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ size_t	ft_strlen(const char *s);
 int		ft_strchr(const char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_line(char *buf);
-char	*get_next_line(int fd);
 char	*ft_rest(char *buf);
 char	*ft_read(int fd, char *buf);
 char	*ft_substr(char *s, unsigned int start, size_t len);

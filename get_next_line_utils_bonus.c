@@ -6,11 +6,11 @@
 /*   By: vterroso <vterroso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:22:31 by vterroso          #+#    #+#             */
-/*   Updated: 2023/04/18 16:47:45 by vterroso         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:25:33 by vterroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
